@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="bower_components/jquery-2.1.4.min/index.js"></script>
+    <script type="text/javascript">
+    (function() {
+      var songkickAPI = "http://api.songkick.com/api/3.0/metro_areas/24426/calendar.json?apikey=tS2vCfgVK2lhq9oj&jsoncallback=?";
+      
+      $.getJSON( songkickAPI, {
+        format: "json"
+        })
+
+        .done(function(data) {
+
+            var results = data.resultsPage.results.event,
+            el = $(".eventResults ul"),
+            events = [],
+            i;
+            
+            $.each(results, function(i, item) {
+                console.log(item)
+
+                 // $.each(item, function(i, item) {
+                 //    console.log(item.performance)
+                 // });
+
+                //html += "<li>" + val.img + "</li>";
+            });
+
+            //el.innerHTML = html;
+
+            
+            
+
+        })
+        
+        .fail(function() {
+            console.log( "error" );
+        })
+
+    })();
+    </script>
+</head>
+<body>
+
+    <div class="eventResults">
+        <ul>
+        </ul>
+    </div>
+
+</body>
+</html>
+
