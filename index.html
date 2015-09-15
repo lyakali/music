@@ -4,7 +4,12 @@
     <script type="text/javascript" src="bower_components/jquery-2.1.4.min/index.js"></script>
     <script type="text/javascript">
     (function() {
-      var songkickAPI = "http://api.songkick.com/api/3.0/metro_areas/24426/calendar.json?apikey=tS2vCfgVK2lhq9oj&jsoncallback=?";
+
+        var currDate = "2015-09-15",
+            location = "24426";
+      
+        var songkickAPI = "http://api.songkick.com/api/3.0/events.json?apikey=tS2vCfgVK2lhq9oj&min_date=2015-09-15&max_date=2015-09-15&location=sk:" + location + "&jsoncallback=?";
+
       
       $.getJSON( songkickAPI, {
         format: "json"
@@ -13,21 +18,29 @@
         .done(function(data) {
 
             var results = data.resultsPage.results.event,
-            el = $(".eventResults ul"),
+            el = $("table"),
             events = [],
-            i;
+            i,
+            venues,
+            row,
+            test;
             
             $.each(results, function(i, item) {
-                console.log(item)
+        
 
-                 // $.each(item, function(i, item) {
-                 //    console.log(item.performance)
-                 // });
+                 $.each(item.performance, function(i, item) {
 
-                //html += "<li>" + val.img + "</li>";
+                 artists = "<tr><td class=\"artist\">" + item.artist.displayName + "</td>";
+
+                 console.log(artists)
+                 
+                })
+                
+                venues += "<td class=\"venue\">" + item.venue.displayName + "</td></tr>";
+
             });
 
-            //el.innerHTML = html;
+            el.append(artists + venues);
 
             
             
@@ -47,6 +60,17 @@
         <ul>
         </ul>
     </div>
+
+    <table>
+        <tr>
+            <th>
+                Artists
+            </th>
+            <th>
+                Venues
+            </th>
+        </tr>
+    </table>
 
 </body>
 </html>
